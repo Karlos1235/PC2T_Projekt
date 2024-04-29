@@ -6,11 +6,11 @@ public class Knihy {
 	private int rokVydání;
 	private boolean dostupná;
 
-	public Knihy (String název, String[] autoři, int rokVydání, boolean dostupná) {
+	public Knihy (String název, String[] autoři, int rokVydání, boolean dostupnost) {
 		this.název = název;
 		this.autoři = autoři;
 		this.rokVydání = rokVydání;
-		this.dostupná = dostupná;
+		this.dostupná = dostupnost;
 	}
 
 	public String getNázev() {

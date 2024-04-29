@@ -11,7 +11,8 @@ public class main {
 		while(true) {
 			System.out.println("Vyberte akci: ");
 			System.out.println("1. Přidat novou knihu");
-			System.out.println("2. Ukončit program");
+			System.out.println("2. Upravit knihu");
+			System.out.println("3. Ukončit program");
 			System.out.println("Vaše volba: ");
 			int volba = scanner.nextInt();
 
@@ -20,6 +21,9 @@ public class main {
 				Knihovna.pridatNovouKnihu(scanner);
 				break;
 			case 2:
+				Knihovna.upravitKnihu(scanner);
+				break;
+			case 3:
 				System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
 				return;
 			default:
