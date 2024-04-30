@@ -76,9 +76,8 @@ public class Knihovna {
 			System.out.println("Knihovna je prázdná");
 			return;
 		}
-		Knihy kniha = knihovna.get(název);
 		
-
+		Knihy kniha = knihovna.get(název);
 		System.out.println("Vyberte, který parametr knihy chcete upravit:");
 		System.out.println("1. Autora/y");
 		System.out.println("2. Rok vydání");
