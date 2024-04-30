@@ -2,6 +2,9 @@ package projekt;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Knihovna {
 	private Map<String, Knihy> knihovna;
@@ -203,6 +206,40 @@ public class Knihovna {
 				System.out.println("Kniha s názvem " + název + " nebyla nalezena.");
 				System.out.println();
 			}
+		}
+	}
+	
+	public void vypisKnihPodleAutora(Scanner scanner) {
+		System.out.println("Zadejte jmeno autora: ");
+		String autor = scanner.nextLine();
+		
+		List<Knihy> knihyPodleAutora = new ArrayList<>();
+		
+		
+		for(Knihy kniha : knihovna.values()) {
+			
+			
+			String[] autoři = kniha.getAutoři();
+			for (String a : autoři) {
+				if (a.equalsIgnoreCase(autor)) {
+					knihyPodleAutora.add(kniha);
+					break;
+				}
+			}
+		}
+		
+		
+		knihyPodleAutora.sort(Comparator.comparingInt(Knihy::getRokVydání));
+		
+		if (!knihyPodleAutora.isEmpty()) {
+			System.out.println("Seznam knih autora " + autor + " v chronologickém pořadí: ");
+			for(Knihy kniha : knihyPodleAutora) {
+				System.out.println("Název: " + kniha.getNázev());
+				System.out.println("Rok vydání: " + kniha.getRokVydání());
+				System.out.println();
+			}
+		} else {
+			System.out.println("Žádné knihy od autora " + " nebyly nalezeny.");
 		}
 	}
 }
