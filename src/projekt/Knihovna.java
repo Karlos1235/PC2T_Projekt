@@ -39,24 +39,23 @@ public class Knihovna {
 		System.out.println("Dostupnost (Dostupná/Nedostupná): ");
 		String dostupnostText = scanner.nextLine();
 		boolean dostupná = dostupnostText.equalsIgnoreCase("Dostupná");
-
+		
+		Knihy kniha = new Knihy(název,autoři, rokVydání, dostupná);
 		if(typ == 1) {
 			System.out.println("Žánr: ");
 			String žánr = scanner.next();
 
-			Román román = new Román(název, autoři, rokVydání, dostupná, žánr);
-
-
+			kniha = new Román(název, autoři, rokVydání, dostupná, žánr);
 		} else if (typ == 2) {
 			System.out.println("Úroveň ročníku: ");
 			int úroveňRočníku = scanner.nextInt();
 
-			Učebnice učebnice = new Učebnice(název, autoři, úroveňRočníku, dostupná, úroveňRočníku);
+			kniha = new Učebnice(název, autoři, úroveňRočníku, dostupná, úroveňRočníku);
 
 		} else {
 			System.out.println("Neplatný typ knihy");
 		}
-		Knihy kniha = new Knihy(název,autoři, rokVydání, dostupná);
+		
 		knihovna.put(název,kniha);
 		System.out.println(knihovna);
 		System.out.println("Kniha byla úspěšně přidána.");
@@ -171,7 +170,7 @@ public class Knihovna {
 			System.out.println("Název: " + název);
 			System.out.println("Autoři: " + String.join(", ", autoři));
 			System.out.println("Typ knihy: " + typKnihy);
-			System.out.println("Detail typu knihy: " + detailTypuKnihy);
+			System.out.println(detailTypuKnihy);
 			System.out.println("Rok vydání: " + rokVydání);
 			System.out.println("Stav dostupnosti: " + (dostupná ? "Dostupná" : "Nedostupná"));
 			System.out.println();
