@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Knihovna {
-	private static Map<String, Knihy> knihovna;
-	
+	private Map<String, Knihy> knihovna;
+
 	public Knihovna() {
 		this.knihovna = new HashMap<>();
 	}
 
 
-	public static void pridatNovouKnihu(Scanner scanner) {
+	public void pridatNovouKnihu(Scanner scanner) {
 		System.out.println("Vyberte typ knihy: ");
 		System.out.println("1. Román ");
 		System.out.println("2. Učebnice ");
@@ -20,7 +20,7 @@ public class Knihovna {
 		scanner.nextLine();
 
 		System.out.println("Název knihy: ");
-		String název = scanner.nextLine();
+		String název = scanner.nextLine().trim();
 
 		System.out.println("Počet autorů: ");
 		int početAutorů = scanner.nextInt();
@@ -65,18 +65,19 @@ public class Knihovna {
 		}
 		Knihy kniha = new Knihy(název,autoři, rokVydání, dostupná);
 		knihovna.put(název,kniha);
+		System.out.println(knihovna);
 		System.out.println("Kniha byla úspěšně přidána.");
 	}
 
-	public static void upravitKnihu(Scanner scanner) {
+	public void upravitKnihu(Scanner scanner) {
 		System.out.println("Zadejte název knihy, kterou chcete upravit: ");
 		String název = scanner.nextLine();
-		
+
 		if(!knihovna.containsKey(název)) {
 			System.out.println("Knihovna je prázdná");
 			return;
-		}
-		
+		} 
+
 		Knihy kniha = knihovna.get(název);
 		System.out.println("Vyberte, který parametr knihy chcete upravit:");
 		System.out.println("1. Autora/y");
@@ -84,7 +85,6 @@ public class Knihovna {
 		System.out.println("3. Dostupnost");
 		System.out.println("Vaše volba: ");
 		int volba = scanner.nextInt();
-		scanner.nextLine();
 
 		switch (volba) {
 		case 1:
@@ -107,7 +107,6 @@ public class Knihovna {
 			System.out.println("Neplatná volba.");
 			break;
 		}
-		knihovna.put(název, kniha);
 		System.out.println("Kniha byla úspěšně aktualizována.");
 	}
 }

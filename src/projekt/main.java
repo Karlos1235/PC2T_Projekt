@@ -6,7 +6,7 @@ public class main {
 		Scanner scanner =  new Scanner(System.in);
 		Knihovna knihovna = new Knihovna();
 
-		System.out.println("Vítejte v knihovně U Dvou přátel");
+		System.out.println("Vítejte v knihovně U Dvou feláků");
 
 		while(true) {
 			System.out.println("Vyberte akci: ");
@@ -15,13 +15,14 @@ public class main {
 			System.out.println("3. Ukončit program");
 			System.out.println("Vaše volba: ");
 			int volba = scanner.nextInt();
+			scanner.nextLine();
 
 			switch (volba) {
 			case 1:
-				Knihovna.pridatNovouKnihu(scanner);
+				knihovna.pridatNovouKnihu(scanner);
 				break;
 			case 2:
-				Knihovna.upravitKnihu(scanner);
+				knihovna.upravitKnihu(scanner);
 				break;
 			case 3:
 				System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
