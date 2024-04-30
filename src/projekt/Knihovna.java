@@ -1,13 +1,13 @@
 package projekt;
 import java.util.Scanner;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 
 public class Knihovna {
 	private Map<String, Knihy> knihovna;
 
 	public Knihovna() {
-		this.knihovna = new HashMap<>();
+		this.knihovna = new TreeMap<>();
 	}
 
 
