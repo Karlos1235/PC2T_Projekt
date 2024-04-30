@@ -44,21 +44,14 @@ public class Knihovna {
 			System.out.println("Žánr: ");
 			String žánr = scanner.next();
 
-			//Vytvoření nového románu
 			Román román = new Román(název, autoři, rokVydání, dostupná, žánr);
-
-			//Todo Vytvořit logiku pro uložení románu do knihovny
 
 
 		} else if (typ == 2) {
 			System.out.println("Úroveň ročníku: ");
 			int úroveňRočníku = scanner.nextInt();
 
-			//Vytvoření nové učebnice
 			Učebnice učebnice = new Učebnice(název, autoři, úroveňRočníku, dostupná, úroveňRočníku);
-
-			//Todo Vytvořit logiku pro uložení učebnice do knihovny
-
 
 		} else {
 			System.out.println("Neplatný typ knihy");
@@ -74,7 +67,7 @@ public class Knihovna {
 		String název = scanner.nextLine();
 
 		if(!knihovna.containsKey(název)) {
-			System.out.println("Knihovna je prázdná");
+			System.out.println("Kniha nebyla nalezena.");
 			return;
 		} 
 
@@ -107,6 +100,81 @@ public class Knihovna {
 			System.out.println("Neplatná volba.");
 			break;
 		}
+		knihovna.put(název, kniha);
 		System.out.println("Kniha byla úspěšně aktualizována.");
+	}
+	
+	public void smazatKnihu(Scanner scanner) {
+		System.out.println("Zadejte název knihy, kterou chcete smazat: ");
+		String název = scanner.nextLine();
+		
+		if(!knihovna.containsKey(název)) {
+			System.out.println("Kniha nebyla nalezena.");
+			return;
+		} 
+		
+		knihovna.remove(název);
+		System.out.println("Kniha " + název + " byla úspěšně odebrána ze seznamu.");
+	}
+	
+	public void zmenitStavKnihy(Scanner scanner) {
+		System.out.println("Zadejte název knihy, u které chcete změnit stav: ");
+		String název = scanner.nextLine();
+		
+		if(!knihovna.containsKey(název)) {
+			System.out.println("Kniha nebyla nalezena.");
+			return;
+		} 
+		
+		Knihy kniha = knihovna.get(název);
+		System.out.println("Zadejte stav knihy (vypůjčená/vrácená): ");
+		String stav = scanner.nextLine();
+		
+		if (stav.equalsIgnoreCase("vypůjčená")) {
+			kniha.setDostupná(false);
+		} else if (stav.equalsIgnoreCase("vrácená")) {
+			kniha.setDostupná(true);
+		} else {
+			System.out.println("Špatně zadaný stav.");
+			return;
+		}
+		
+		knihovna.put(název, kniha);
+		System.out.println("Stav knihy " + název + " byl úspěšně změněn.");
+	}
+	
+	public void vypisKnih(Scanner scanner) {
+		if (knihovna.isEmpty()) {
+			System.out.println("Knihovna je prázdná.");
+			return;
+		}
+		
+		System.out.println("Zde je seznam knih v abecedním pořadí: ");
+		
+		for(Map.Entry<String, Knihy> entry : knihovna.entrySet()) {
+			Knihy kniha = entry.getValue();
+			String název = entry.getKey();
+			String[] autoři = kniha.getAutoři();
+			int rokVydání = kniha.getRokVydání();
+			boolean dostupná = kniha.isDostupná();
+			String typKnihy = "";
+			String detailTypuKnihy = "";
+			
+			if (kniha instanceof Román) {
+				typKnihy = "Román";
+				detailTypuKnihy = "Žánr: " + ((Román) kniha).getŽánr();
+			} else if (kniha instanceof Učebnice) {
+				typKnihy = "Učebnice";
+				detailTypuKnihy = "Ročník: " + ((Učebnice) kniha).getÚroveňRočníku();
+			}
+			
+			System.out.println("Název: " + název);
+			System.out.println("Autoři: " + String.join(", ", autoři));
+			System.out.println("Typ knihy: " + typKnihy);
+			System.out.println("Detail typu knihy: " + detailTypuKnihy);
+			System.out.println("Rok vydání: " + rokVydání);
+			System.out.println("Stav dostupnosti: " + (dostupná ? "Dostupná" : "Nedostupná"));
+			System.out.println();
+		}
 	}
 }
