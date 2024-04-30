@@ -17,7 +17,9 @@ public class main {
 			System.out.println("5. Zobrazit seznam knih");
 			System.out.println("6. Vyhledat knihu");
 			System.out.println("7. Výpis všech knih podle autora");
-			System.out.println("8. Ukončit program");
+			System.out.println("8. Výpis všech knih podle žánru");
+			System.out.println("9. Výpis všech vypůjčených knih");
+			System.out.println("10. Ukončit program");
 			System.out.println("Vaše volba: ");
 			int volba = scanner.nextInt();
 			scanner.nextLine();
@@ -45,6 +47,12 @@ public class main {
 				knihovna.vypisKnihPodleAutora(scanner);
 				break;
 			case 8:
+				knihovna.vypisKnihPodleZanru(scanner);
+				break;
+			case 9:
+				knihovna.vypisVypujcenychKnih(scanner);
+				break;
+			case 10:
 				System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
 				return;
 			default:
