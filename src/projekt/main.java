@@ -9,13 +9,14 @@ public class main {
 		System.out.println("Vítejte v knihovně U Dvou feláků");
 
 		while(true) {
-			System.out.println("Vyberte akci: ");
+			System.out.println("Vyberte číslo: ");
 			System.out.println("1. Přidat novou knihu");
 			System.out.println("2. Upravit knihu");
 			System.out.println("3. Smazat knihu");
 			System.out.println("4. Změnit stav knihy");
 			System.out.println("5. Zobrazit seznam knih");
-			System.out.println("6. Ukončit program");
+			System.out.println("6. Vyhledat knihu");
+			System.out.println("7. Ukončit program");
 			System.out.println("Vaše volba: ");
 			int volba = scanner.nextInt();
 			scanner.nextLine();
@@ -37,6 +38,9 @@ public class main {
 				knihovna.vypisKnih(scanner);
 				break;
 			case 6:
+				knihovna.vyhledatKnihu(scanner);;
+				break;
+			case 7:
 				System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
 				return;
 			default:

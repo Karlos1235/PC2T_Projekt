@@ -59,6 +59,7 @@ public class Knihovna {
 		knihovna.put(název,kniha);
 		System.out.println(knihovna);
 		System.out.println("Kniha byla úspěšně přidána.");
+		System.out.println();
 	}
 
 	public void upravitKnihu(Scanner scanner) {
@@ -101,6 +102,7 @@ public class Knihovna {
 		}
 		knihovna.put(název, kniha);
 		System.out.println("Kniha byla úspěšně aktualizována.");
+		System.out.println();
 	}
 	
 	public void smazatKnihu(Scanner scanner) {
@@ -114,6 +116,7 @@ public class Knihovna {
 		
 		knihovna.remove(název);
 		System.out.println("Kniha " + název + " byla úspěšně odebrána ze seznamu.");
+		System.out.println();
 	}
 	
 	public void zmenitStavKnihy(Scanner scanner) {
@@ -140,6 +143,7 @@ public class Knihovna {
 		
 		knihovna.put(název, kniha);
 		System.out.println("Stav knihy " + název + " byl úspěšně změněn.");
+		System.out.println();
 	}
 	
 	public void vypisKnih(Scanner scanner) {
@@ -174,6 +178,31 @@ public class Knihovna {
 			System.out.println("Rok vydání: " + rokVydání);
 			System.out.println("Stav dostupnosti: " + (dostupná ? "Dostupná" : "Nedostupná"));
 			System.out.println();
+		}
+	}
+	
+	public void vyhledatKnihu(Scanner scanner) {
+		System.out.println("Zadejte název knihy, kterou chcete vyhledat: ");
+		String název = scanner.nextLine();
+		
+		if(knihovna.containsKey(název)) {
+			Knihy kniha = knihovna.get(název);
+			System.out.println("Informace o knize: ");
+			System.out.println("Název: " + kniha.getNázev());
+			System.out.println("Autoři: " + String.join(", ", kniha.getAutoři()));
+			System.out.println("Stav dostupnosti: " + (kniha.isDostupná() ? "Dostupná" : "Nedostupná"));
+			System.out.println("Rok vydání: " + kniha.getRokVydání());
+			
+			if(kniha instanceof Román) {
+				System.out.println("Typ knihy: Román");
+				System.out.println("Žánr: " + ((Román) kniha).getŽánr());
+			} else if (kniha instanceof Učebnice) {
+				System.out.println("Typ knihy: Učebnice");
+				System.out.println("Ročník: " + ((Učebnice) kniha).getÚroveňRočníku());
+			} else {
+				System.out.println("Kniha s názvem " + název + " nebyla nalezena.");
+				System.out.println();
+			}
 		}
 	}
 }
