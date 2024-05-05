@@ -5,6 +5,7 @@ import java.util.TreeSet;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -96,7 +97,8 @@ public class Knihovna {
 	}
 
 	public void pridatNovouKnihu(Scanner scanner) {
-		System.out.println("Vyberte typ knihy: ");
+		try {
+			System.out.println("Vyberte typ knihy: ");
 		System.out.println("1. Román ");
 		System.out.println("2. Učebnice ");
 		System.out.println("Vaše volba: ");
@@ -146,10 +148,16 @@ public class Knihovna {
 		System.out.println(knihovna);
 		System.out.println("Kniha byla úspěšně přidána.");
 		System.out.println();
+		} catch (InputMismatchException e) {
+			System.out.println("Špatně zadaný parametr.");
+			scanner.nextLine();
+		}
+	
 	}
-
 	public void upravitKnihu(Scanner scanner) {
-		System.out.println("Zadejte název knihy, kterou chcete upravit: ");
+		try{
+			System.out.println("Zadejte název knihy, kterou chcete upravit: ");
+		
 		String název = scanner.nextLine();
 
 		if(!knihovna.containsKey(název)) {
@@ -189,6 +197,10 @@ public class Knihovna {
 		knihovna.put(název, kniha);
 		System.out.println("Kniha byla úspěšně aktualizována.");
 		System.out.println();
+		} catch (InputMismatchException e) {
+			System.out.println("Špatně zadaný parametr.");
+			scanner.nextLine();
+		}
 	}
 
 	public void smazatKnihu(Scanner scanner) {
