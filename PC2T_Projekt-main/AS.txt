@@ -1,0 +1,4 @@
+Název: AS
+Autoři: A, B, Rok vydání: 123
+Dostupnost: Ne
+Žánr: ASDF
