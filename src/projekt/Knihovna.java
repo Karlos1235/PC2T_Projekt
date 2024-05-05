@@ -1,10 +1,16 @@
 package projekt;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Knihovna {
 	private Map<String, Knihy> knihovna;
@@ -13,6 +19,41 @@ public class Knihovna {
 		this.knihovna = new TreeMap<>();
 	}
 
+	private static void ulozUčebniciDoSouboru(String název, String[] autoři, int rokVydání, boolean dostupná, int úroveňRočníku) {
+		try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(název + ".txt"));
+            writer.write("Název: " + název + "\n");
+            writer.write("Autoři: ");
+            for (String autor : autoři) {
+                writer.write(autor + ", ");
+            }
+            writer.write("\nRok vydání: " + rokVydání + "\n");
+            writer.write("Dostupnost: " + (dostupná ? "Ano" : "Ne") + "\n");
+            writer.write("Úroveň ročníku: " + úroveňRočníku + "\n");
+            writer.close();
+            System.out.println("Informace byly úspěšně uloženy do souboru.");
+        } catch (IOException e) {
+            System.out.println("Chyba při zápisu do souboru: " + e.getMessage());
+        }
+	}
+	
+	private static void ulozRománDoSouboru(String název, String[] autoři, int rokVydání, boolean dostupná, String žánr) {
+		try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(název + ".txt"));
+            writer.write("Název: " + název + "\n");
+            writer.write("Autoři: ");
+            for (String autor : autoři) {
+                writer.write(autor + ", ");
+            }
+            writer.write("\nRok vydání: " + rokVydání + "\n");
+            writer.write("Dostupnost: " + (dostupná ? "Ano" : "Ne") + "\n");
+            writer.write("Žánr: " + žánr + "\n");
+            writer.close();
+            System.out.println("Informace byly úspěšně uloženy do souboru.");
+        } catch (IOException e) {
+            System.out.println("Chyba při zápisu do souboru: " + e.getMessage());
+        }
+	}
 
 	public void pridatNovouKnihu(Scanner scanner) {
 		System.out.println("Vyberte typ knihy: ");
@@ -47,13 +88,15 @@ public class Knihovna {
 		if(typ == 1) {
 			System.out.println("Žánr: ");
 			String žánr = scanner.next();
-
+			
 			kniha = new Román(název, autoři, rokVydání, dostupná, žánr);
+			//Knihovna.ulozRománDoSouboru(název, autoři, rokVydání, dostupná, žánr);
 		} else if (typ == 2) {
 			System.out.println("Úroveň ročníku: ");
 			int úroveňRočníku = scanner.nextInt();
 
 			kniha = new Učebnice(název, autoři, úroveňRočníku, dostupná, úroveňRočníku);
+			//Knihovna.ulozUčebniciDoSouboru(název, autoři, rokVydání, dostupná, úroveňRočníku);
 
 		} else {
 			System.out.println("Neplatný typ knihy");
@@ -149,7 +192,7 @@ public class Knihovna {
 		System.out.println();
 	}
 
-	public void vypisKnih(Scanner scanner) {
+	public void vypisKnih(Scanner scanner) {	
 		if (knihovna.isEmpty()) {
 			System.out.println("Knihovna je prázdná.");
 			return;
@@ -187,7 +230,7 @@ public class Knihovna {
 	public void vyhledatKnihu(Scanner scanner) {
 		System.out.println("Zadejte název knihy, kterou chcete vyhledat: ");
 		String název = scanner.nextLine();
-
+		
 		if(knihovna.containsKey(název)) {
 			Knihy kniha = knihovna.get(název);
 			System.out.println("Informace o knize: ");
@@ -208,7 +251,16 @@ public class Knihovna {
 			}
 		}
 	}
+/*String nazevSouboru = název + ".txt";
+		try (BufferedReader reader = new BufferedReader(new FileReader(nazevSouboru))) {
+            int rokVydání = Integer.parseInt(reader.readLine().split(": ")[1]);
+            String[] autoři = reader.readLine().split(": ")[1].split(", ");
+            boolean dostupná = reader.readLine().split(": ")[1].equalsIgnoreCase("Ano");
 
+            Knihy kniha = new Knihy(název, autoři, rokVydání, dostupná);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 	public void vypisKnihPodleAutora(Scanner scanner) {
 		System.out.println("Zadejte jmeno autora: ");
 		String autor = scanner.nextLine();
@@ -291,5 +343,8 @@ public class Knihovna {
 			System.out.print("Žádné knihy nejsou vypůjčené");
 			System.out.println();
 		}
+	}
+	public TreeSet<Knihy> getSeznamKnih() {
+	    return new TreeSet<>(knihovna.values());
 	}
 }

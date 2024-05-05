@@ -1,10 +1,12 @@
 package projekt;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class main {
 	public static void main(String[] args) {
 		Scanner scanner =  new Scanner(System.in);
 		Knihovna knihovna = new Knihovna();
+		Databáze dbconnection = new Databáze();
 
 		System.out.println("Vítejte v knihovně U Dvou feláků");
 
@@ -53,7 +55,14 @@ public class main {
 				knihovna.vypisVypujcenychKnih(scanner);
 				break;
 			case 10:
-				System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
+				if (dbconnection.getDBConnection()) {
+                    TreeSet<Knihy> knihy = knihovna.getSeznamKnih();
+                    dbconnection.pridejKnihu(knihy);
+                    dbconnection.closeConnection();
+                    System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
+                } else {
+                    System.out.println("Nepodařilo se připojit k databázi.");
+                }
 				return;
 			default:
 				System.out.println("Neplatná volba. Zkuste to prosím znovu.");
