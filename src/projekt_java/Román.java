@@ -1,4 +1,4 @@
-package projekt;
+package projekt_java;
 
 public class Román extends Knihy {
 	private String žánr;

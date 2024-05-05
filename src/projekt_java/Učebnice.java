@@ -1,4 +1,4 @@
-package projekt;
+package projekt_java;
 
 public class Učebnice extends Knihy{
 	private int úroveňRočníku;

@@ -1,4 +1,4 @@
-package projekt;
+package projekt_java;
 import java.util.Scanner;
 
 public class main {
