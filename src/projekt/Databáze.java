@@ -88,6 +88,7 @@ public class Databáze {
                 boolean dostupná = rs.getBoolean("dostupná");
                 String žánr = rs.getString("žánr");
                 int úroveňRočniku = rs.getInt("úroveňRočníku");
+                kniha = new Knihy(název,autoři, rokVydání, dostupná);
                 if(úroveňRočniku == 0) {
                 	kniha = new Román(název, autoři, rokVydání, dostupná, žánr);
                 } else {

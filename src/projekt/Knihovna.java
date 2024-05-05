@@ -54,6 +54,46 @@ public class Knihovna {
             System.out.println("Chyba při zápisu do souboru: " + e.getMessage());
         }
 	}
+	
+	public void načtiUčebniciZeSouboru(String cestaSouboru) {
+	    try (BufferedReader reader = new BufferedReader(new FileReader(cestaSouboru))) {
+	        String název = reader.readLine().substring(8);
+	        String autořiString = reader.readLine().substring(8);
+	        String[] autoři = autořiString.split(", ");
+	        int rokVydání = Integer.parseInt(reader.readLine().substring(13));
+	        boolean dostupná = reader.readLine().substring(13).equals("Ano");
+	        int úroveňRočníku = Integer.parseInt(reader.readLine().substring(17));
+
+	        
+	        Knihy kniha = new Učebnice(název, autoři, rokVydání, dostupná, úroveňRočníku);
+	        knihovna.put(název,kniha);
+			System.out.println(knihovna);
+			System.out.println("Kniha byla úspěšně přidána.");
+			System.out.println();
+	    } catch (IOException e) {
+	        System.out.println("Chyba při čtení ze souboru: " + e.getMessage());
+	    }
+	    
+	}
+
+	public void načtiRománZeSouboru(String cestaSouboru) {
+	    try (BufferedReader reader = new BufferedReader(new FileReader(cestaSouboru))) {
+	        String název = reader.readLine().substring(8);
+	        String autořiString = reader.readLine().substring(8);
+	        String[] autoři = autořiString.split(", ");
+	        int rokVydání = Integer.parseInt(reader.readLine().substring(13));
+	        boolean dostupná = reader.readLine().substring(13).equals("Ano"); 
+	        String žánr = reader.readLine().substring(7);
+
+	        Knihy kniha = new Román(název, autoři, rokVydání, dostupná, žánr);
+	        knihovna.put(název,kniha);
+			System.out.println(knihovna);
+			System.out.println("Kniha byla úspěšně přidána.");
+			System.out.println();
+	    } catch (IOException e) {
+	        System.out.println("Chyba při čtení ze souboru: " + e.getMessage());
+	    }
+	}
 
 	public void pridatNovouKnihu(Scanner scanner) {
 		System.out.println("Vyberte typ knihy: ");
@@ -90,13 +130,13 @@ public class Knihovna {
 			String žánr = scanner.next();
 			
 			kniha = new Román(název, autoři, rokVydání, dostupná, žánr);
-			//Knihovna.ulozRománDoSouboru(název, autoři, rokVydání, dostupná, žánr);
+			Knihovna.ulozRománDoSouboru(název, autoři, rokVydání, dostupná, žánr);
 		} else if (typ == 2) {
 			System.out.println("Úroveň ročníku: ");
 			int úroveňRočníku = scanner.nextInt();
 
-			kniha = new Učebnice(název, autoři, úroveňRočníku, dostupná, úroveňRočníku);
-			//Knihovna.ulozUčebniciDoSouboru(název, autoři, rokVydání, dostupná, úroveňRočníku);
+			kniha = new Učebnice(název, autoři, rokVydání, dostupná, úroveňRočníku);
+			Knihovna.ulozUčebniciDoSouboru(název, autoři, rokVydání, dostupná, úroveňRočníku);
 
 		} else {
 			System.out.println("Neplatný typ knihy");
@@ -344,7 +384,7 @@ public class Knihovna {
 			System.out.println();
 		}
 	}
-	public TreeSet<Knihy> getSeznamKnih() {
-	    return new TreeSet<>(knihovna.values());
-	}
+		public TreeSet<Knihy> getSeznamKnih() {
+		    return new TreeSet<>(knihovna.values());
+		}
 }

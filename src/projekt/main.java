@@ -22,6 +22,7 @@ public class main {
 			System.out.println("8. Výpis všech knih podle žánru");
 			System.out.println("9. Výpis všech vypůjčených knih");
 			System.out.println("10. Ukončit program");
+			//System.out.println("11. Načíst knihu ze souboru");
 			System.out.println("Vaše volba: ");
 			int volba = scanner.nextInt();
 			scanner.nextLine();
@@ -55,15 +56,36 @@ public class main {
 				knihovna.vypisVypujcenychKnih(scanner);
 				break;
 			case 10:
-				if (dbconnection.getDBConnection()) {
+				/*if (dbconnection.getDBConnection()) {
                     TreeSet<Knihy> knihy = knihovna.getSeznamKnih();
                     dbconnection.pridejKnihu(knihy);
                     dbconnection.closeConnection();
                     System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
                 } else {
                     System.out.println("Nepodařilo se připojit k databázi.");
-                }
+                }*/
+				
+				System.out.println("Děkujeme za využití naší aplikace. Ukončuji program.");
 				return;
+			/*case 11:
+				System.out.println("Název souboru: ");
+				String názevSouboru = scanner.nextLine().trim();
+				String cestaSouboru = názevSouboru + ".txt";
+				System.out.println("Vyberte typ knihy: ");
+				System.out.println("1. Román ");
+				System.out.println("2. Učebnice ");
+				System.out.println("Vaše volba: ");
+				int typ = scanner.nextInt();
+				scanner.nextLine();
+				
+				if(typ == 1) {
+					knihovna.načtiRománZeSouboru(cestaSouboru);
+				} else if (typ == 2) {
+					knihovna.načtiUčebniciZeSouboru(cestaSouboru);
+				} else {
+					System.out.println("Neplatný typ knihy");
+				}
+				break;*/
 			default:
 				System.out.println("Neplatná volba. Zkuste to prosím znovu.");
 				break;
